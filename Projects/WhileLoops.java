@@ -8,34 +8,26 @@ public class WhileLoops {
     public static void main(String[] args) {
         int max = 15;
         int min = 0;
-        int a = 0;
-        int b = 0;
-        while (max > 0) {
-            max--;
-            if (max+1 == 0) {
-                System.out.println("BOOM!");
-            } else {
-                System.out.println(max+1 + "..");
-            }
+        int example_a = 10;
+        int example_b = 0;
+        int example_c = 0;
+        while (example_a != 4) {
+          System.out.println("Starting from 10, ending on 5, subtracting by 1 : " + example_a);
+          example_a--;
         }
-        System.out.println("Lets reverse it!");
-        while (min < 15) {
-            min++;
-            if (min+1 == 0) {
-                System.out.println("BOOM!");
-            } else {
-                System.out.println(min+1 + "..");
-            }
+        System.out.println("\n");
+        do {
+            example_c += 5;
+            System.out.println("Do-While Loops (Starts at 0, increments by 5, ends at 15): " + example_c);
         }
-        int start = 0;
-        while (a < 10 || b <= 20) { // || represents "or", && represents "and"
-            System.out.println("A Value: " + a + " B Value: " + b);
-            if (a < 10) {
-                a++;
-            }
-            if (b <= 10) {
-                a++;
-            }
-        }
+        while (example_c < 15);
+        
+        //do { // Minimum amount of times each ones run.
+        //    System.out.println("Do-While: Ran.");
+        //}
+        //while (4 == 5);
+        //while (4 == 5) {
+        //    System.out.println("While-Loop: Ran.");
+        //}
     }
 }
