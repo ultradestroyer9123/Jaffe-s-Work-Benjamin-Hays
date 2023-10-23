@@ -25,8 +25,12 @@ public class Quiz {
     String convertAnswerToString = Integer.toString(answer);
     while (!convertAnswerToString.equals(Question)) {
         try {
+            
+            
             Scanner myObj = new Scanner(System.in);
             Question = myObj.nextLine();  // Read user input
+            
+            
             int Question_error_handle = Integer.parseInt(Question);
             if (convertAnswerToString.equals(Question)) {
                 break;
