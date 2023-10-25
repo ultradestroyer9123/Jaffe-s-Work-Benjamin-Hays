@@ -22,29 +22,32 @@ public class NextScanners {
         try {
             File mystery = new File("Mystery.csv");
             Scanner file_scan = new Scanner(mystery);
-            int add_total = 0;
-            int total_sum = 0;
+            
             while (file_scan.hasNextLine()) {
-                String data = file_scan.nextLine();
-                System.out.println(data);
-                String[] items = data.split(",");
-                int Num;
-                for (int i=0; i < data.length(); i++) {
-                    boolean number;
+                String[] item = file_scan.nextLine().split(",");
+                int avg = 0;
+                int total_values = 0;
+                boolean is_class_section = false;
+                for (int i = 0; i < item.length; i++) {
                     try {
-                        Num = Integer.parseInt(items[i]);
-                        number = true;
+                        if (String.format(item[i]).equals("Class section")) {
+                            System.out.println("Class section 1 thru 10 | -> 1,2,3,etc.. ->");
+                            is_class_section = true;
+                        } else if (i == 0) {
+                            System.out.print(item[i] + " Average: ");
+                        } else {
+                            avg += Integer.parseInt(item[i]);
+                            total_values += 1;
+                        }
                     } catch (NumberFormatException err) {
-                        number = false;
-                    }
-                    if (number) {
-                        add_total++;
-                        total_sum += Integer.parseInt(items[i]);
-                        
-                    }
+                        System.out.println("Caught value isn't a number: " + item[i]);
+                    }  
+                }
+                if (!is_class_section) {
+                    System.out.println(avg/total_values);
                 }
             }
-            System.out.println(");
+            
             file_scan.close();
         } catch (FileNotFoundException err) {
             System.out.println("File not found");
