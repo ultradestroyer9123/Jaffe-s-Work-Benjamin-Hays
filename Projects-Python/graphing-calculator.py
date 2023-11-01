@@ -22,24 +22,89 @@ def create_graph(x,y):
         graph += "\n"
     return graph
 
-graph = create_graph(21,21)
+# def get_dimensions(graph = graph):
+#     y = 0
+#     x_ = 0
+#     for x in graph:
+#         if x == "\n": 
+#             y += 1
+#     for b in graph.split("\n")[0]:
+#         if b == " " or b == "|":
+#             x_ += 1
 
-def get_dimensions(graph = graph):
-    y = 0
-    x_ = 0
-    for x in graph:
-        if x == "\n": 
-            y += 1
-    for b in graph.split("\n")[0]:
-        if b == " " or b == "|":
-            x_ += 1
-
-    return (int((x_/2)-0.5),y)
+#     return (int((x_/2)-0.5),y)
         
-print(get_dimensions())
+# dimens = get_dimensions()
 
-if 'y' in equation and "x" in equation and "=" in equation:
-    x=eval(equation.split("=")[1])
+# def find_center(g=graph):
+#     x_l = 0
+#     y_l = 0
+#     for char in g:
+#         if char == "+":
+#             break
+#         if char == "\n":
+#             y_l += 1
+#             x_l -= x_l
+#         else:
+#             x_l += 1
+#     return x_l,y_l
 
-else:
-    print("Error: Not an equation.")
+# center = find_center()
+# print(center)
+
+def edit_pos(lx,ly,graph):
+    lx+11
+    ly+11
+    try:
+        print(lx,ly)
+        g = list(graph.split("\n")[ly-1])
+        g[lx-1] = "#"
+        newg = graph.split("\n")
+        newg[ly-1] = ''.join(g)
+        return "\n".join(newg)
+    except:
+        return graph
+
+# if 'y' in equation and "x" in equation and "=" in equation:
+#     for iteration in range(dimens[0]):
+#         iteration += center[0]
+#         try:
+#             y_pos=eval(equation.split("=")[1].replace("x",str(iteration))) += center[1]
+#             graph = edit_pos(iteration,round(y_pos))
+#         except Exception as e:
+#             print(e)
+#             break
+#     print(graph)
+# else:
+#     print("Error: Not an equation.")
+
+
+
+
+
+y_eq = equation.split("=")[1]
+array = []
+y_arr = []
+for x in range(-10,11,1):
+    tup = x,round(eval(y_eq.replace("x",str(x))))
+    array.append(tup)
+    y_arr.append(tup[1])
+    
+
+    
+graph = create_graph(20,20)
+
+for x,y in array:
+    graph = edit_pos(x*2,y,graph)
+        
+        
+print(graph)
+    
+        
+    
+
+    
+
+
+
+
