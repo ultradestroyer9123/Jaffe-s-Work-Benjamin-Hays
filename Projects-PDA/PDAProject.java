@@ -2,51 +2,48 @@
 
 import static java.lang.System.out;
 import java.util.*;
+import java.lang.Math;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 // lower bound = /2 and add 7 upper = sub 7 and mult by 2
 public class PDAProject {
-    public static boolean PermDatingAge(int age1,int age2) {
-        float upperbound = 0f;
-        float lowerbound = 0f;
-        if (age1 > age2) {
-            upperbound = (age1-7)/2;
-            lowerbound = (age1/2)+7;
-        } else if (age1 < age2) {
-            upperbound = (age2-7)/2;
-            lowerbound = (age2/2)+7;            
-        } else {
-            return true;
-        }
-        if (age1 > lowerbound && age1 < upperbound && age2 > lowerbound && age2 < upperbound) {
-            System.out.println("Age1: " + age1 + "Age2: " + age2 + "Upper: " + upperbound + "Lower: " + lowerbound);
-        }
-        System.out.println("Age1: " + age1 + "Age2: " + age2 + "Upper: " + upperbound + "Lower: " + lowerbound);
-        return true;
+    
+    public static void printWarning(String Str, int age) {
+        System.out.println("\u001B[33m" + Str.replace("{age}",Integer.toString(age)) + "\u001B[0m");
+    }
+    
+    public static void printError(String Str, String age) {
+        System.out.println("\u001B[31m" + Str.replace("{age}",age) + "\u001B[0m");
+    }
+    
+    public static void printGood(String Str, int age) {
+        System.out.println("\u001B[32m" + Str.replace("{age}",Integer.toString(age)) + "\u001B[0m");
     }
     
     public static void main (String[] args) {
-        // This is where we ask for the users age to make sure they are capable of 'PDA'
-        int age1 = 0;
-        int age2 = 0;
-        int minimum_age = 0;
+        int minimum_age = 18;
+        int age;
         while (true) {
-            System.out.println("Write 2 ages seperated by a ', ':");
+            System.out.println("\033[1mHow old are you >> \033[0m");
             Scanner scanner = new Scanner(System.in);
-            scanner.useDelimiter(", |\n");
             try {
-                age1 = scanner.nextInt();
-                age2 = scanner.nextInt();
+                age = scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("'" + scanner.next() + "' is not a number! Try again.");
+                printError("'{age}' is not a number. Try again!", scanner.next());
             }
         }
-        if (age1 < minimum_age || age2 < minimum_age) {
-            System.out.println(age1 + " is too young unfortunately.");            
+        if (age < minimum_age) {
+            printWarning("{age} is too young! {age} is less than 18.", age);
         } else {
-            PermDatingAge(age1,age2);
+            int minimum = Math.round((age/2)+7);
+            int maximum = Math.round((age-7)*2);
+            System.out.println((age/2)+7);
+            printGood(
+                "As a(n) \033[1m{age}\033[0m\u001B[32m year old, your range is between \033[1m[min]\033[0m\u001B[32m and \033[1m[max]\033[0m"
+                .replace("[min]",Integer.toString(minimum > minimum_age?minimum:minimum_age))
+                .replace("[max]",Integer.toString(maximum)), age);
         }
     }
 }

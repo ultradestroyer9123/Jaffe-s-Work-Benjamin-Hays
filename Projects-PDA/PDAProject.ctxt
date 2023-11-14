@@ -1,7 +1,11 @@
 #BlueJ class context
 comment0.target=PDAProject
-comment1.params=age1\ age2
-comment1.target=boolean\ PermDatingAge(int,\ int)
-comment2.params=args
-comment2.target=void\ main(java.lang.String[])
-numComments=3
+comment1.params=Str\ age
+comment1.target=void\ printWarning(java.lang.String,\ int)
+comment2.params=Str\ age
+comment2.target=void\ printError(java.lang.String,\ java.lang.String)
+comment3.params=Str\ age
+comment3.target=void\ printGood(java.lang.String,\ int)
+comment4.params=args
+comment4.target=void\ main(java.lang.String[])
+numComments=5
