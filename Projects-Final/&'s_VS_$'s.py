@@ -31,7 +31,7 @@ __________________________________________________
 |________________________________________________|
 """
 
-abc_to_nums = {
+abc_p = {
     'A':1,
     'B':2,
     'C':3,
@@ -47,10 +47,15 @@ offset_x = 8
 increase_x = 5
 increase_y = 3
 
-def change_pos(position, grid=grid):
+def change_pos(orig,position, grid=grid):
     """Position should be in format: 'G3' or 'E1'."""
-    position = position.split("")
-
+    x,y = position.split("")
+    x = abc_p[x.upper()]
+    y = int(y)
+    x = (x*increase_x) + offset_x
+    y = (y*increase_y) + offset_y
+    
+    
     return grid
 
 ampersands = False
