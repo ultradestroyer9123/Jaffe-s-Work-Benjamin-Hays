@@ -1,5 +1,4 @@
-grid = """
-__________________________________________________
+grid = """__________________________________________________
 |                                                |
 |   ___A____B____C____D____E____F____G____H__    |
 |   |#####     #####     #####     #####     |   |
@@ -49,17 +48,20 @@ increase_y = 3
 
 def change_pos(orig,position, grid=grid):
     """Position should be in format: 'G3' or 'E1'."""
-    x,y = position.split("")
+    x,y = list(position)
     x = abc_p[x.upper()]
     y = int(y)
     x = (x*increase_x) + offset_x
     y = (y*increase_y) + offset_y
-    
+    print(grid.split("\n")[y])
+    current_char = 0
     
     return grid
 
 ampersands = False
 while True:
+    print('Ex: A1-B2')
     ampersands = not ampersands
     print(grid)
-    input(f"Next Position |{'Ampersands' if ampersands else 'Dollars'}| > ")
+    inp = input(f"Next Position |{'Ampersands' if ampersands else 'Dollars'}| > ")
+    change_pos(inp.split("-")[0],inp.split("-")[1])
