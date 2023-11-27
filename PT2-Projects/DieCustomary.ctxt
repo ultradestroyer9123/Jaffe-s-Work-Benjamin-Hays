@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=DieCustomary
+comment1.params=
+comment1.target=void\ roll()
+comment2.params=newValue
+comment2.target=void\ setSides(int)
+comment3.params=
+comment3.target=int\ getCurrentRoll()
+comment4.params=
+comment4.target=int\ rollAndGiveVal()
+numComments=5
