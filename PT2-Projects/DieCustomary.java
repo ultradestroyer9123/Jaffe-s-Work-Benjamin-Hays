@@ -5,7 +5,7 @@ public class DieCustomary
     private int value;
     private int sides;
     
-    public int DieCustomary() {
+    public int main() {
         this.value = new Random().nextInt(this.sides) + 1;
         return this.value;
     }
