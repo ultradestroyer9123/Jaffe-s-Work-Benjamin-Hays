@@ -1,8 +1,8 @@
 #BlueJ package file
 editor.fx.0.height=737
 editor.fx.0.width=800
-editor.fx.0.x=595
-editor.fx.0.y=132
+editor.fx.0.x=76
+editor.fx.0.y=861
 objectbench.height=95
 objectbench.width=774
 package.divider.horizontal=0.6
@@ -24,7 +24,7 @@ readme.width=49
 readme.x=10
 readme.y=10
 target1.height=70
-target1.name=DieN
+target1.name=DieAll
 target1.showInterface=false
 target1.type=ClassTarget
 target1.width=130
