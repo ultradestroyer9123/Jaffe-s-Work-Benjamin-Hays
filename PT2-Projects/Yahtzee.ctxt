@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Yahtzee
+comment1.params=
+comment1.target=int\ randDieVal()
+comment2.params=
+comment2.target=void\ rollAll()
+comment3.params=diePos
+comment3.target=void\ rollSpecific(int)
+comment4.params=
+comment4.target=java.lang.String\ summarize()
+comment5.params=
+comment5.target=java.lang.String\ toString()
+numComments=6
