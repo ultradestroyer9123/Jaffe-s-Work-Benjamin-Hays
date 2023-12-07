@@ -44,25 +44,11 @@ public class Sedoku {
                         "#########",};
 
 
-        for (int make_y = 0; make_y < grid.length; make_y++) {
-            
-            String current_row = "";
-            for (int create_row = 0; create_row < 9; create_row++) {
-                current_row = "";
-                nums = "123456789";
-                for (int columns_above = 0; columns_above < make_y; columns_above++) {
-
-                    System.out.println(grid[columns_above+1]);
-                    System.out.print(" ");
-                    System.out.print(create_row);
-                    nums = nums.replace(grid[columns_above+1]
-                                        .charAt(create_row) + "","");
-                    int rand_int1 = new Random().nextInt(nums.length()-1);
-                    current_row += nums.charAt(rand_int1) + "";
-                }
-            }
-            grid[make_y] = current_row;
+        for (int row = 0; row < grid.length; row++) {
+            String new_nums = nums;
+            for (int row2 = 0;)
         }
+
         for (int row = 0; row < grid.length; row++) {
             for (int column = 0; column < grid[row].length(); column++) {
                 JButton b=new JButton(Integer.toString(row+1));//creating instance of JButton

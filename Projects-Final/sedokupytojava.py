@@ -29,3 +29,4 @@ for row in grid:
         current_col += 1
     new_grid.append(new_row)
 print(new_grid)
+
