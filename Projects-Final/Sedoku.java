@@ -43,15 +43,27 @@ public class Sedoku {
                         "#########",
                         "#########",};
 
+        String[] new_grid = new String[grid.length];
 
         for (int row = 0; row < grid.length; row++) {
-            String new_nums = nums;
-            for (int row2 = 0;)
+            int current_col = 0;
+            String new_row = "";
+            for (int column = 0; column < grid[row].length(); column++) {
+                String new_nums = "123456789";
+                for (int rowX = 0; rowX < grid.length; rowX++) {
+                    new_nums = new_nums.replace(grid[rowX].charAt(current_col) + "", "");
+                    System.out.println(current_col);
+                }
+                String rand = new_nums.charAt(new Random().nextInt(new_nums.length())) + "";
+                new_row += rand;
+                current_col += 1;
+            }
+            new_grid[row] = new_row;
         }
 
-        for (int row = 0; row < grid.length; row++) {
-            for (int column = 0; column < grid[row].length(); column++) {
-                JButton b=new JButton(Integer.toString(row+1));//creating instance of JButton
+        for (int row = 0; row < new_grid.length; row++) {
+            for (int column = 0; column < new_grid[row].length(); column++) {
+                JButton b=new JButton(new_grid[row].charAt(column) + "");//creating instance of JButton
                 b.setBounds(0+(60*row),(frame_y_offset-37)+(60*column),60, 60);//x axis, y axis, width, height
                 b.setBackground(Color.BLACK);
                 b.setForeground(Color.WHITE);
