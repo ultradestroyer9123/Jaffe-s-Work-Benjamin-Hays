@@ -2,30 +2,34 @@ import java.util.Random;
 
 public class Yahtzee
 {   
-    private int[] dices;
+    private Die6[] dice;
     
     public Yahtzee() {
-        this.dices = new int[]{-1,-1,-1,-1,-1};
+        this.dice = {
+            new Die6(),
+            new Die6(),
+            new Die6(),
+            new Die6(),
+            new Die6(),
+        };
     }
     
     public void roll() {
-        for (int die = 0; die < this.dices.length; die++) {
-            dices[die] = new Random().nextInt(6) + 1;
+        for (int i = 0; i < this.dice.length; i++) {
+            this.dice[i].roll();
         }
     }
     
     public void roll(int dieNumber) {
-        if (!(dieNumber < 1 || dieNumber > 5)) {
-            this.dices[dieNumber] = new Random().nextInt(6) + 1;
-        }
+        dice[dieNumber].roll();        
     }
     
     public String summarize() {
         String summary = "";
         for (int die = 0; die < 6; die++) {
             int instanceCount = 0;
-            for (int count = 0; count < this.dices.length; count++) {
-                instanceCount += die==this.dices[count]?1:0;
+            for (int count = 0; count < this.dice.length; count++) {
+                instanceCount += die==this.dice[count].getValue()?1:0;
             }
             summary += Integer.toString(die+1) + "-" + Integer.toString(instanceCount) + (die!=5?"; ":"");
         }
@@ -34,8 +38,8 @@ public class Yahtzee
     
     public String toString() {
         String strOfDice = "";
-        for (int values = 0; values < this.dices.length; values++) {
-            strOfDice += Integer.toString(this.dices[values]) + " ";
+        for (int values = 0; values < this.dice.length; values++) {
+            strOfDice += Integer.toString(this.dice[values].getValue()) + " ";
         }
         return "Dice values: " + strOfDice;
     }
