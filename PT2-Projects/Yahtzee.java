@@ -2,46 +2,76 @@ import java.util.Random;
 
 public class Yahtzee
 {   
-    private Die6[] dice;
-    
+    private Die6 die1;
+    private Die6 die2;
+    private Die6 die3;
+    private Die6 die4;
+    private Die6 die5;
+
     public Yahtzee() {
-        this.dice = {
-            new Die6(),
-            new Die6(),
-            new Die6(),
-            new Die6(),
-            new Die6(),
-        };
+        this.die1 = new Die6();
+        this.die2 = new Die6();
+        this.die3 = new Die6();
+        this.die4 = new Die6();
+        this.die5 = new Die6();
+        roll();
     }
     
     public void roll() {
-        for (int i = 0; i < this.dice.length; i++) {
-            this.dice[i].roll();
-        }
+        this.die1.roll();
+        this.die2.roll();
+        this.die3.roll();
+        this.die4.roll();
+        this.die5.roll();
     }
     
     public void roll(int dieNumber) {
-        dice[dieNumber].roll();        
+        if (dieNumber == 1) {
+            this.die1.roll();
+        } else if (dieNumber == 2) {
+            this.die2.roll();
+        } else if (dieNumber == 3) {
+            this.die3.roll();
+        } else if (dieNumber == 4) {
+            this.die4.roll();
+        } else if (dieNumber == 5) {
+            this.die5.roll();
+        }
     }
     
     public String summarize() {
         String summary = "";
-        for (int die = 0; die < 6; die++) {
-            int instanceCount = 0;
-            for (int count = 0; count < this.dice.length; count++) {
-                instanceCount += die==this.dice[count].getValue()?1:0;
+        int[] dice = {this.die1.getValue(),
+                    this.die2.getValue(),
+                    this.die3.getValue(),
+                    this.die4.getValue(),
+                    this.die5.getValue()};
+        for (int index = 0; index < 6; index++) {
+            int count = 0;
+            for(int value:dice){
+
+        	if (value == index+1) { 
+                    count++; 
+                }
             }
-            summary += Integer.toString(die+1) + "-" + Integer.toString(instanceCount) + (die!=5?"; ":"");
+            String ending = index+1 != 6?";":"";
+            summary += Integer.toString(index+1) + "-" + Integer.toString(count) + ending;
+
         }
         return summary;
     }
     
     public String toString() {
         String strOfDice = "";
-        for (int values = 0; values < this.dice.length; values++) {
-            strOfDice += Integer.toString(this.dice[values].getValue()) + " ";
+        int[] dice = {this.die1.getValue(),
+                    this.die2.getValue(),
+                    this.die3.getValue(),
+                    this.die4.getValue(),
+                    this.die5.getValue()};
+        for (int values = 0; values < dice.length; values++) {
+            strOfDice += Integer.toString(dice[values]) + " ";
         }
-        return "Dice values: " + strOfDice;
+        return "Dice values: " + strOfDice.substring(0,strOfDice.length()-1);
     }
 }
 
