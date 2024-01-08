@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=HaysBenjamin
+comment1.params=
+comment1.target=HaysBenjamin()
+comment2.params=
+comment2.target=java.lang.String\ speak()
+comment3.params=
+comment3.target=java.lang.String\ getDisposition()
+comment4.params=
+comment4.target=java.lang.String\ getColor()
+comment5.params=
+comment5.target=java.lang.String\ getType()
+numComments=6

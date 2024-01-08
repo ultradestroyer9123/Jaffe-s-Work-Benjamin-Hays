@@ -5,13 +5,13 @@ public class HaysBenjamin extends Animal
     super("Hays Benjamin", "brown", 5);
   }
   public String speak() {
-  	return "Oookee aka!"
+      return "Oookee aka!";
   }
   public String getDisposition() {
-  	return "facetious";
+      return "facetious";
   }
   public String getColor() {
-  	return "brown";
+      return "brown";
   }
   
   public String getType() {
