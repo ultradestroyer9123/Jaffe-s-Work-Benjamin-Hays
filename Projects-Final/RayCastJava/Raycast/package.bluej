@@ -1,8 +1,8 @@
 #BlueJ package file
 editor.fx.0.height=737
 editor.fx.0.width=800
-editor.fx.0.x=595
-editor.fx.0.y=132
+editor.fx.0.x=988
+editor.fx.0.y=134
 objectbench.height=93
 objectbench.width=776
 package.divider.horizontal=0.6
@@ -28,5 +28,5 @@ target1.name=DrawMap
 target1.showInterface=false
 target1.type=ClassTarget
 target1.width=120
-target1.x=150
-target1.y=50
+target1.x=130
+target1.y=0
