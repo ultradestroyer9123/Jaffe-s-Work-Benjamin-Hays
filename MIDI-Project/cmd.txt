@@ -1,0 +1,6 @@
+python3 upload_video.py --file="sample-5s.mp4"
+                       --title="Experimental MIDI Video Upload"
+                       --description="This video was uploaded using Python"
+                       --keywords="Piano Tutorial, MIDI"
+                       --category="10"
+                       --privacyStatus="public"
