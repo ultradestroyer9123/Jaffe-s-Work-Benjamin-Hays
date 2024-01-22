@@ -1,15 +1,17 @@
 public class MazeGame {
-    DrawMap map = new DrawMap();
+    private DrawMap map;
+    private DrawFrame frame;
     public MazeGame() {
-        
+        newMap();
+        this.frame = new DrawFrame(this.map.getMap(), "north");
     }
     
     public void refresh() {
-        
+        //this.frame.printFrame();
     }
 
     public void newMap() {
-        map = new DrawMap();
+        this.map = new DrawMap();
         refresh();
     }
 }
