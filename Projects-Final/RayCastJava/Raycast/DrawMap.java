@@ -60,11 +60,22 @@ public class DrawMap {
         return this.grid;
     }
     
+    public int[] locateChar() {
+        int x_local = 0;
+        int y_local = 0;
+        for (int character = 0; character < getMap().length(); character++) {
+            if (getMap().charAt(character) + "" == "*") {
+                return int{x_local, y_local};
+            }
+            x_local += 1
+        }
+    }
+    
     public void printMap() {
         System.out.println(this.grid);
     }
     
-    public void face(String direction) {
+    public void faceDirection(String direction) {
         if (direction == "left") {
             this.facing -= 1;
         } else {

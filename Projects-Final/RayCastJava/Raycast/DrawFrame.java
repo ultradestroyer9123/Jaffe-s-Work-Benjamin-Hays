@@ -12,9 +12,9 @@ public class DrawFrame {
     int pixel_size = 10;
     int pixel_amount_x = 100;
     int pixel_amount_y = 80;
-    public DrawFrame(String grid, String facing) {
+    public DrawFrame() {
         JFrame frame = new JFrame();
-    
+        DrawMap map = new DrawMap();
         frame.addKeyListener(new KeyAdapter() {
           public void keyPressed(KeyEvent e) {
             int keyCode = e.getKeyCode();
@@ -22,10 +22,10 @@ public class DrawFrame {
               System.out.println("Forward");
             }
             else if (keyCode == KeyEvent.VK_A) {
-              System.out.println("Left");
+              map.faceDirection("left");
             }
             else if (keyCode == KeyEvent.VK_D) {
-            System.out.println("Right");
+              map.faceDirection("right");
             }
           }
         });
@@ -34,13 +34,22 @@ public class DrawFrame {
         frame.setVisible(false);//making the frame not visible to build pixels  
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setSize(pixel_size*pixel_amount_x,pixel_size*pixel_amount_y);
+        frame.setResizable(false);
         for (int x = 0; x < pixel_amount_x; x++) {
             for (int y = 0; y < pixel_amount_y; y++) {
                 JPanel pixel = new JPanel();
+                if (y == pixel_amount_y/2 || y == (pixel_amount_y/2)+0.5) {
+                    pixel.setBackground(Color.white);
+                } else {
+                    pixel.setBackground(Color.black);
+                }
                 pixel.setBounds(x*pixel_size,y*pixel_size,pixel_size,pixel_size);
                 frame.add(pixel);
             }
         }
+        
+        
+        
         frame.setVisible(true);//making the frame visible
     }
 }
