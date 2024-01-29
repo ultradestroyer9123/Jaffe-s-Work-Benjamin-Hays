@@ -65,10 +65,17 @@ public class DrawMap {
         int y_local = 0;
         for (int character = 0; character < getMap().length(); character++) {
             if (getMap().charAt(character) + "" == "*") {
-                return int{x_local, y_local};
+                break;
             }
-            x_local += 1
+            if (getMap().charAt(character) + "" == "\n") {
+                y_local += 1;
+                x_local = 0;
+            } else {
+                x_local += 1;
+            }
         }
+        int[] result = {x_local, y_local};
+        return result;
     }
     
     public void printMap() {
@@ -110,12 +117,19 @@ public class DrawMap {
         return String.join("\n", output);
     }
     
-    public void updateGrid(String newGrid) {
-        this.grid = newGrid;
-    }
-    
     public void move() {
-        // Key = W
-        
+        System.out.println(Integer.toString(locateChar()[0])+Integer.toString(locateChar()[1]));
+        String direction = getFacing();
+        int[] charPos = locateChar();
+        this.grid = changeGridAtIndex(this.grid,charPos[0],charPos[1]," ");
+        if (direction == "North") {
+            this.grid = changeGridAtIndex(this.grid,charPos[0],charPos[1]-1,"*");
+        } else if (direction == "South") {
+            this.grid = changeGridAtIndex(this.grid,charPos[0],charPos[1]+1,"*");
+        } else if (direction == "East") {
+            this.grid = changeGridAtIndex(this.grid,charPos[0]+1,charPos[1],"*");
+        } else if (direction == "West") {
+            this.grid = changeGridAtIndex(this.grid,charPos[0]+1,charPos[1],"*");
+        }
     }
 }

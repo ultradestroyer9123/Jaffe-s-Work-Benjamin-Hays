@@ -16,18 +16,19 @@ public class DrawFrame {
         JFrame frame = new JFrame();
         DrawMap map = new DrawMap();
         frame.addKeyListener(new KeyAdapter() {
-          public void keyPressed(KeyEvent e) {
-            int keyCode = e.getKeyCode();
-            if (keyCode == KeyEvent.VK_W) {
-              System.out.println("Forward");
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_W) {
+                    map.move();
+                }
+                else if (keyCode == KeyEvent.VK_A) {
+                    map.faceDirection("left");
+                }
+                else if (keyCode == KeyEvent.VK_D) {
+                    map.faceDirection("right");
+                }
+                map.printMap();
             }
-            else if (keyCode == KeyEvent.VK_A) {
-              map.faceDirection("left");
-            }
-            else if (keyCode == KeyEvent.VK_D) {
-              map.faceDirection("right");
-            }
-          }
         });
         Font f1 = new Font(Font.SANS_SERIF, Font.PLAIN, 20); 
         frame.setLayout(null);//using no layout managers  
