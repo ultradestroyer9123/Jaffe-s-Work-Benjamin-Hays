@@ -86,7 +86,13 @@ public class DrawFrame {
                 }
             }
         } else if (facing == "South") { // #-----*---# = distance of 4
-        
+            for (int iterate = y; iterate < map.split("\n").length; iterate++) {
+            	if ((map.split("\n")[iterate].charAt(x)+"").equals("#")) {
+                    break;
+                } else {
+                    distance += 1;
+                }
+            }
         } else if (facing == "West") {
             String line = map.split("\n")[y];
             for (int iterating = line.length()-1; iterating >= 0; iterating--) {
