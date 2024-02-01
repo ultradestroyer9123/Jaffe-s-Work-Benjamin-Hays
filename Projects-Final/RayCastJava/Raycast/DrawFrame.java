@@ -67,6 +67,7 @@ public class DrawFrame {
         if (facing == "North") {
             for (int iterate = y; iterate > 0; iterate--) {
             	if ((map.split("\n")[iterate].charAt(x)+"").equals("#")) {
+                    System.out.println(distance);
                     break;
                 } else {
                     distance += 1;
@@ -83,11 +84,13 @@ public class DrawFrame {
                     startCounting = true;
                 } else if (currentLetter.equals("#") && startCounting) {
                     System.out.println(distance);
+                    break;
                 }
             }
         } else if (facing == "South") { // #-----*---# = distance of 4
             for (int iterate = y; iterate < map.split("\n").length; iterate++) {
             	if ((map.split("\n")[iterate].charAt(x)+"").equals("#")) {
+                    System.out.println(distance);
                     break;
                 } else {
                     distance += 1;
@@ -105,6 +108,7 @@ public class DrawFrame {
                     startCounting = true;
                 } else if (currentLetter.equals("#") && startCounting) {
                     System.out.println(distance);
+                    break;
                 }
             }
         }
