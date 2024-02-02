@@ -9,13 +9,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.net.CookieHandler;
 public class DrawFrame {
-    int pixel_size = 10;
-    int pixel_amount_x = 100;
-    int pixel_amount_y = 80;
+    int pixel_size = 100;
+    int pixel_amount_x = 11;
+    int pixel_amount_y = 9;
     int currentMove = 0;
+    JPanel[][] pixelList;
     public DrawFrame() {
         JFrame frame = new JFrame();
         DrawMap map = new DrawMap();
+        pixelList = new JPanel[map.getDimension()][map.getDimension()];
         frame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
@@ -52,6 +54,7 @@ public class DrawFrame {
                     pixel.setBackground(Color.black);
                 }
                 pixel.setBounds(x*pixel_size,y*pixel_size,pixel_size,pixel_size);
+                pixelList[x][y] = pixel;
                 frame.add(pixel);
             }
         }
@@ -61,12 +64,41 @@ public class DrawFrame {
         frame.setVisible(true);//making the frame visible
     }
     
+    public void updatePixel(int row, int column, boolean toggled) {
+        if (toggled) {
+            pixelList[row][column].setBackground(Color.white);
+        } else {
+            pixelList[row][column].setBackground(Color.black);
+        }
+    }
+    
+    public void updatePixelColumn(int column, int size) {
+        int dimension = pixelList.length;
+        double midPoint;
+        if (dimension % 2 == 0) {
+            midPoint = (dimension/2)+1;
+        } else {
+            midPoint = (dimension/2) + 0.5;
+        }
+        
+        int middle = Integer.parseInt(Double.toString(midPoint));
+        
+        for (int iterate = 0; iterate < dimension; iterate++) {
+            updatePixel(iterate,column,false);
+        }
+        
+        for (int iterate = 0; iterate < size; iterate++) {
+            updatePixel(middle-iterate,column,true);
+            updatePixel(middle+iterate,column,true);
+        }
+    }
+    
     public int distanceFromFacing(String map, String facing, int x, int y) {
         int distance = 0;
         boolean startCounting = false;
         if (facing == "North") {
             for (int iterate = y; iterate > 0; iterate--) {
-            	if ((map.split("\n")[iterate].charAt(x)+"").equals("#")) {
+                if ((map.split("\n")[iterate].charAt(x)+"").equals("#")) {
                     System.out.println(distance);
                     break;
                 } else {
@@ -89,7 +121,7 @@ public class DrawFrame {
             }
         } else if (facing == "South") { // #-----*---# = distance of 4
             for (int iterate = y; iterate < map.split("\n").length; iterate++) {
-            	if ((map.split("\n")[iterate].charAt(x)+"").equals("#")) {
+                if ((map.split("\n")[iterate].charAt(x)+"").equals("#")) {
                     System.out.println(distance);
                     break;
                 } else {

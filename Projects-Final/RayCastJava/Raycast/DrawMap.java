@@ -12,6 +12,7 @@ public class DrawMap {
     private boolean horizontal;
     private boolean placedFinishLine;
     private boolean placedPlayer;
+    private int dimension;
     // 0 = West
     // 1 = North
     // 2 = East
@@ -25,6 +26,7 @@ public class DrawMap {
         if (sizeGrid % 2 != 0) {
             sizeGrid -= 1;
         }
+        this.dimension = sizeGrid;
         int offset_x = new Random().nextInt(sizeGrid/2);
         int offset_y = new Random().nextInt(sizeGrid/2);
         // Finish Line
@@ -55,7 +57,11 @@ public class DrawMap {
             this.grid += "\n";
         }
     }
-
+    
+    public int getDimension() {
+        return this.dimension;
+    }
+    
     public String getMap() {
         return this.grid;
     }
