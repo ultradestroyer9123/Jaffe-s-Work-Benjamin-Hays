@@ -50,6 +50,7 @@ public class EventLoop {
 
             } else if (gameState == Constants.CHECK_IF_WINNER) {
                 if (state.isWinner()) {
+                    ui.printBoard(state);
                     if (state.getWhoseMove() == Constants.X) {
                         state.setGameState(Constants.X_WINS);
                     } else {
@@ -61,6 +62,7 @@ public class EventLoop {
 
             } else if (gameState == Constants.CHECK_IF_TIE) {
                 if (state.isTie()) {
+                    ui.printBoard(state);
                     ui.printTieGame();
                     state.setGameState(Constants.GAME_OVER);
                 } else {
