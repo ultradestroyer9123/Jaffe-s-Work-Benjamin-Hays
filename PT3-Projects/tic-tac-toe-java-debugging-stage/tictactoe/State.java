@@ -13,19 +13,24 @@ public class State
 
     public boolean isWinner() {
         int total;
-        for (int row=0; row<Constants.BOARD_SIZE; row++) {
-            total = getBoardCell(row, 0) + getBoardCell(row,1) + getBoardCell(row,2);
+        // Check rows
+        for (int row = 0; row < Constants.BOARD_SIZE; row++) {
+            total = getBoardCell(row, 0) + getBoardCell(row, 1) + getBoardCell(row, 2);
             if (total == -3 || total == 3) return true;
         }
-        for (int col=0; col<Constants.BOARD_SIZE; col++) {
-            total = getBoardCell(0, col) + getBoardCell(1,col) + getBoardCell(2, col);
+
+        // Check columns
+        for (int col = 0; col < Constants.BOARD_SIZE; col++) {
+            total = getBoardCell(0, col) + getBoardCell(1, col) + getBoardCell(2, col);
             if (total == -3 || total == 3) return true;
         }
-        total = getBoardCell(0, 0) + getBoardCell(1,1) + getBoardCell(2, 2);
+
+        // Check diagonals
+        total = getBoardCell(0, 0) + getBoardCell(1, 1) + getBoardCell(2, 2);
         if (total == -3 || total == 3) return true;
-        total = getBoardCell(2, 0) + getBoardCell(1,1) + getBoardCell(0, 2);
-        if (total == -3 || total == 3) return true;
-        return false;
+
+        total = getBoardCell(2, 0) + getBoardCell(1, 1) + getBoardCell(0, 2);
+        return total == -3 || total == 3;
     }
 
     public boolean isTie() {
@@ -51,7 +56,7 @@ public class State
         return whoseMove;
     }
 
-    public void setWhoseMore(int whoseMove) {
+    public void setWhoseMove(int whoseMove) {
         this.whoseMove = whoseMove;
     }
 
@@ -78,5 +83,4 @@ public class State
     public void setBoardCell(int row, int col, int value) {
         this.board[row][col] = value;
     }
-
 }
