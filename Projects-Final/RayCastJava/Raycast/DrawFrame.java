@@ -165,9 +165,12 @@ public class DrawFrame {
                 }
             }
         }
+        // LEFT OFF HERE LEFT OFF HERE DUMB EWJFEWJFOREWIGOIREUGOIJREWQFOIQEWJF
         
-        int distance_straight_ahead;
-        
+        //EWJFOIERGOIREWUGOIUREG
+        int[] charPos = map.locateChar();
+        int distance_straight_ahead = "Temp";
+        updatePixelColumn(midPoint,distance_straight_ahead);
         if (facing == "North") {
             
         } else if (facing == "East") {
