@@ -66,7 +66,7 @@ public class DrawFrame {
     
     public void updatePixel(int row, int column, boolean toggled) {
         if (toggled) {
-            pixelList[row][column].setBackground(Color.white);
+            pixelList[row][column].setBackground(Color.red);
         } else {
             pixelList[row][column].setBackground(Color.black);
         }
@@ -81,7 +81,7 @@ public class DrawFrame {
             midPoint = (dimension/2) + 0.5;
         }
         
-        int middle = Integer.parseInt(Double.toString(midPoint));
+        int middle = (int) midPoint;
         
         for (int iterate = 0; iterate < dimension; iterate++) {
             updatePixel(iterate,column,false);
@@ -147,8 +147,37 @@ public class DrawFrame {
         return distance;
     }
     
+    public int[] locateCharFromString(String map) {
+        int x_local = 0;
+        int y_local = 0;
+    
+        for (int character = 0; character < map.length(); character++) {
+            if (String.valueOf(map.charAt(character)).equals("*")) {
+                break;
+            }
+            if (String.valueOf(map.charAt(character)).equals("\n")) {
+                y_local += 1;
+                x_local = 0;
+            } else {
+                x_local += 1;
+            }
+        }
+        int[] result = {x_local,y_local};
+        return result;
+    }
+    
     public void refresh(String map, String facing) {
         // Find what line the player is on
+        double midPoint;
+        int dimension = pixelList.length;
+        if (dimension % 2 == 0) {
+            midPoint = (dimension/2)+1;
+        } else {
+            midPoint = (dimension/2) + 0.5;
+        }
+        
+        int middle = (int) midPoint;
+        
         boolean doBreak = false;
         int plr_pos_x;
         int plr_pos_y;
@@ -168,9 +197,9 @@ public class DrawFrame {
         // LEFT OFF HERE LEFT OFF HERE DUMB EWJFEWJFOREWIGOIREUGOIJREWQFOIQEWJF
         
         //EWJFOIERGOIREWUGOIUREG
-        int[] charPos = map.locateChar();
-        int distance_straight_ahead = "Temp";
-        updatePixelColumn(midPoint,distance_straight_ahead);
+        int[] charPos = locateCharFromString(map);
+        int distance_straight_ahead = distanceFromFacing(map,facing,charPos[0],charPos[1]);
+        updatePixelColumn(middle,distance_straight_ahead);
         if (facing == "North") {
             
         } else if (facing == "East") {
