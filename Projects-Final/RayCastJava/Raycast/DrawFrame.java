@@ -36,7 +36,7 @@ public class DrawFrame {
                 map.printMap();
                 System.out.println(map.getFacing());
                 System.out.println("Ran: "+Integer.toString(currentMove));
-                refresh(map.getMap(), map.getFacing());
+                refresh(map.getMap(), map.getFacing(), pixelList);
             }
         });
         Font f1 = new Font(Font.SANS_SERIF, Font.PLAIN, 20); 
@@ -45,11 +45,17 @@ public class DrawFrame {
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setSize(pixel_size*pixel_amount_x,pixel_size*pixel_amount_y);
         frame.setResizable(false);
+        int count = 0;
         for (int x = 0; x < pixel_amount_x; x++) {
             for (int y = 0; y < pixel_amount_y; y++) {
                 JPanel pixel = new JPanel();
                 if (y == pixel_amount_y/2 || y == (pixel_amount_y/2)+0.5) {
-                    pixel.setBackground(Color.white);
+                    count++;
+                    if (count % 2 == 0) {    
+                        pixel.setBackground(Color.white);
+                    } else {
+                        pixel.setBackground(Color.red);
+                    }
                 } else {
                     pixel.setBackground(Color.black);
                 }
@@ -60,19 +66,29 @@ public class DrawFrame {
         }
         
         
-        
+        System.out.println(pixelList);
         frame.setVisible(true);//making the frame visible
     }
+
     
-    public void updatePixel(int row, int column, boolean toggled) {
-        if (toggled) {
-            pixelList[row][column].setBackground(Color.red);
+    public void updatePixel(int row, int column, boolean toggled, JPanel[][] pixelList_Parameter) {
+        System.out.println(row);
+        System.out.println(column);
+        if (pixelList_Parameter != null && pixelList_Parameter[row][column] != null) {
+            if (toggled) {
+                pixelList_Parameter[row][column].setBackground(Color.red);
+                pixelList_Parameter[row][column].repaint();
+            } else {
+                pixelList_Parameter[row][column].setBackground(Color.black);
+                pixelList_Parameter[row][column].repaint();
+            }
         } else {
-            pixelList[row][column].setBackground(Color.black);
+            // Handle the case where pixelList_Parameter or pixelList_Parameter[row][column] is null
         }
     }
+
     
-    public void updatePixelColumn(int column, int size) {
+    public void updatePixelColumn(int column, int size, JPanel[][] pixelList_Parameter) {
         int dimension = pixelList.length;
         double midPoint;
         if (dimension % 2 == 0) {
@@ -84,12 +100,12 @@ public class DrawFrame {
         int middle = (int) midPoint;
         
         for (int iterate = 0; iterate < dimension; iterate++) {
-            updatePixel(iterate,column,false);
+            updatePixel(iterate,column,false,pixelList_Parameter);
         }
         
         for (int iterate = 0; iterate < size; iterate++) {
-            updatePixel(middle-iterate,column,true);
-            updatePixel(middle+iterate,column,true);
+            updatePixel(middle-iterate,column,true,pixelList_Parameter);
+            updatePixel(middle+iterate,column,true,pixelList_Parameter);
         }
     }
     
@@ -99,7 +115,7 @@ public class DrawFrame {
         if (facing == "North") {
             for (int iterate = y; iterate > 0; iterate--) {
                 if ((map.split("\n")[iterate].charAt(x)+"").equals("#")) {
-                    System.out.println(distance);
+                    // System.out.println(distance);
                     break;
                 } else {
                     distance += 1;
@@ -115,14 +131,14 @@ public class DrawFrame {
                 if (currentLetter.equals("*")) {
                     startCounting = true;
                 } else if (currentLetter.equals("#") && startCounting) {
-                    System.out.println(distance);
+                    //System.out.println(distance);
                     break;
                 }
             }
         } else if (facing == "South") { // #-----*---# = distance of 4
             for (int iterate = y; iterate < map.split("\n").length; iterate++) {
                 if ((map.split("\n")[iterate].charAt(x)+"").equals("#")) {
-                    System.out.println(distance);
+                    //System.out.println(distance);
                     break;
                 } else {
                     distance += 1;
@@ -131,7 +147,6 @@ public class DrawFrame {
         } else if (facing == "West") {
             String line = map.split("\n")[y];
             for (int iterating = line.length()-1; iterating >= 0; iterating--) {
-                System.out.println(iterating);
                 String currentLetter = line.charAt(iterating) + "";
                 if (startCounting) {
                     distance += 1;
@@ -139,7 +154,7 @@ public class DrawFrame {
                 if (currentLetter.equals("*")) {
                     startCounting = true;
                 } else if (currentLetter.equals("#") && startCounting) {
-                    System.out.println(distance);
+                    //System.out.println(distance);
                     break;
                 }
             }
@@ -166,10 +181,10 @@ public class DrawFrame {
         return result;
     }
     
-    public void refresh(String map, String facing) {
+    public void refresh(String map, String facing, JPanel[][] pixelList_Parameter) {
         // Find what line the player is on
         double midPoint;
-        int dimension = pixelList.length;
+        int dimension = pixelList_Parameter.length;
         if (dimension % 2 == 0) {
             midPoint = (dimension/2)+1;
         } else {
@@ -199,7 +214,7 @@ public class DrawFrame {
         //EWJFOIERGOIREWUGOIUREG
         int[] charPos = locateCharFromString(map);
         int distance_straight_ahead = distanceFromFacing(map,facing,charPos[0],charPos[1]);
-        updatePixelColumn(middle,distance_straight_ahead);
+        updatePixelColumn(middle,distance_straight_ahead, pixelList_Parameter);
         if (facing == "North") {
             
         } else if (facing == "East") {
