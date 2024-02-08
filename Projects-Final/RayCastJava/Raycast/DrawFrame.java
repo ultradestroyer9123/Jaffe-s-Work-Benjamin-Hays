@@ -17,7 +17,7 @@ public class DrawFrame {
     public DrawFrame() {
         JFrame frame = new JFrame();
         DrawMap map = new DrawMap();
-        pixelList = new JPanel[map.getDimension()][map.getDimension()];
+        pixelList = new JPanel[pixel_amount_x][pixel_amount_y];
         frame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
@@ -35,7 +35,6 @@ public class DrawFrame {
                 }
                 map.printMap();
                 System.out.println(map.getFacing());
-                System.out.println("Ran: "+Integer.toString(currentMove));
                 refresh(map.getMap(), map.getFacing(), pixelList);
             }
         });
@@ -51,13 +50,9 @@ public class DrawFrame {
                 JPanel pixel = new JPanel();
                 if (y == pixel_amount_y/2 || y == (pixel_amount_y/2)+0.5) {
                     count++;
-                    if (count % 2 == 0) {    
-                        pixel.setBackground(Color.white);
-                    } else {
-                        pixel.setBackground(Color.red);
-                    }
+                    pixel.setBackground(Color.WHITE);
                 } else {
-                    pixel.setBackground(Color.black);
+                    pixel.setBackground(Color.BLACK);
                 }
                 pixel.setBounds(x*pixel_size,y*pixel_size,pixel_size,pixel_size);
                 pixelList[x][y] = pixel;
@@ -65,31 +60,27 @@ public class DrawFrame {
             }
         }
         
-        
-        System.out.println(pixelList);
+    
         frame.setVisible(true);//making the frame visible
     }
 
     
     public void updatePixel(int row, int column, boolean toggled, JPanel[][] pixelList_Parameter) {
-        System.out.println(row);
-        System.out.println(column);
+
         if (pixelList_Parameter != null && pixelList_Parameter[row][column] != null) {
             if (toggled) {
-                pixelList_Parameter[row][column].setBackground(Color.red);
+                pixelList_Parameter[row][column].setBackground(Color.WHITE);
                 pixelList_Parameter[row][column].repaint();
             } else {
-                pixelList_Parameter[row][column].setBackground(Color.black);
+                pixelList_Parameter[row][column].setBackground(Color.BLACK);
                 pixelList_Parameter[row][column].repaint();
             }
-        } else {
-            // Handle the case where pixelList_Parameter or pixelList_Parameter[row][column] is null
         }
     }
 
     
     public void updatePixelColumn(int column, int size, JPanel[][] pixelList_Parameter) {
-        int dimension = pixelList.length;
+        int dimension = pixelList[0].length;
         double midPoint;
         if (dimension % 2 == 0) {
             midPoint = (dimension/2)+1;
