@@ -91,12 +91,12 @@ public class DrawFrame {
         int middle = (int) midPoint;
         
         for (int iterate = 0; iterate < dimension; iterate++) {
-            updatePixel(iterate,column,false,pixelList_Parameter);
+            updatePixel(column,iterate,false,pixelList_Parameter);
         }
-        
+        updatePixel(column,middle,true,pixelList_Parameter);
         for (int iterate = 0; iterate < size; iterate++) {
-            updatePixel(middle-iterate,column,true,pixelList_Parameter);
-            updatePixel(middle+iterate,column,true,pixelList_Parameter);
+            updatePixel(column,middle-iterate,true,pixelList_Parameter);
+            updatePixel(column,middle+iterate,true,pixelList_Parameter);
         }
     }
     
@@ -200,14 +200,24 @@ public class DrawFrame {
                 }
             }
         }
-        // LEFT OFF HERE LEFT OFF HERE DUMB EWJFEWJFOREWIGOIREUGOIJREWQFOIQEWJF
-        
-        //EWJFOIERGOIREWUGOIUREG
+
         int[] charPos = locateCharFromString(map);
         int distance_straight_ahead = distanceFromFacing(map,facing,charPos[0],charPos[1]);
-        updatePixelColumn(middle,distance_straight_ahead, pixelList_Parameter);
+        updatePixelColumn(middle,middle-distance_straight_ahead+1, pixelList_Parameter);
         if (facing == "North") {
-            
+            // YOU ARE LEAVING OFF HERE AS OF FEBURWARY 9 
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            /
         } else if (facing == "East") {
             
         } else if (facing == "South") {
