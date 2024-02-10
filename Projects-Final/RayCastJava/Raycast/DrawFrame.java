@@ -9,9 +9,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.net.CookieHandler;
 public class DrawFrame {
-    int pixel_size = 100;
-    int pixel_amount_x = 11;
-    int pixel_amount_y = 9;
+    int pixel_size = 75;
+    int pixel_amount_x = 19;
+    int pixel_amount_y = 15;
     int currentMove = 0;
     JPanel[][] pixelList;
     public DrawFrame() {
@@ -172,8 +172,51 @@ public class DrawFrame {
         return result;
     }
     
+    public int sendRayForDistance(String map, String facing, double tilt) {
+        int[] xy = locateCharFromString(map);
+        int x = xy[0];
+        int y = xy[1];
+        double new_x = x;
+        double new_y = y;
+        int distance;
+        int increment = 0;
+        while (true) {
+            if (facing.equals("North")) {
+                new_y -= 1;
+                new_x += tilt; // Adjust x-coordinate based on tilt
+            } else if (facing.equals("East")) {
+                new_x += 1;
+                new_y += tilt; // Adjust y-coordinate based on tilt
+            } else if (facing.equals("South")) {
+                new_y += 1;
+                new_x -= tilt; // Adjust x-coordinate based on tilt
+            } else if (facing.equals("West")) {
+                new_x -= 1;
+                new_y -= tilt; // Adjust y-coordinate based on tilt
+            }
+            int temp_x = (int) Math.round(new_x);
+            int temp_y = (int) Math.round(new_y);
+            // Check if the calculated indices are within bounds
+            if (temp_y >= 0 && temp_y < map.split("\n").length && temp_x >= 0 && temp_x < map.split("\n")[temp_y].length()) {
+                if (map.split("\n")[temp_y].charAt(temp_x) == '#') {
+                    break;
+                }
+            } else {
+                break; // Exit the loop if indices are out of bounds
+            }
+            increment++;
+        }
+        return increment+1;
+    }
+
+
+
+    
     public void refresh(String map, String facing, JPanel[][] pixelList_Parameter) {
-        // Find what line the player is on
+        int[] xy = locateCharFromString(map);
+        int x = xy[0];
+        int y = xy[1];
+        
         double midPoint;
         int dimension = pixelList_Parameter.length;
         if (dimension % 2 == 0) {
@@ -183,47 +226,22 @@ public class DrawFrame {
         }
         
         int middle = (int) midPoint;
-        
-        boolean doBreak = false;
-        int plr_pos_x;
-        int plr_pos_y;
-        for (int line = 0; line < map.split("\n").length; line++) {
-            if (doBreak) {
-                break;
-            }
-            for (int character = 0; character < map.split("\n")[line].length(); character++) {
-                if ((map.split("\n")[line].charAt(character) + "").equals("*")) {
-                    plr_pos_x = character;
-                    plr_pos_y = line;
-                    doBreak = true;
-                    break;
-                }
-            }
-        }
 
         int[] charPos = locateCharFromString(map);
         int distance_straight_ahead = distanceFromFacing(map,facing,charPos[0],charPos[1]);
         updatePixelColumn(middle,middle-distance_straight_ahead+1, pixelList_Parameter);
-        if (facing == "North") {
-            // YOU ARE LEAVING OFF HERE AS OF FEBURWARY 9 
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            /
-        } else if (facing == "East") {
-            
-        } else if (facing == "South") {
-        
-        } else if (facing == "West") {
-        
+        if (facing == "South" || facing == "West") {
+            for (double current = dimension-1; current > -1; current--) {
+                double tilt = -0.5 + current/(dimension-1);
+                int distance = sendRayForDistance(map,facing,tilt);
+                updatePixelColumn((int) current,middle-distance+1, pixelList_Parameter);
+            }
+        } else {
+            for (double current = 0; current < dimension; current++) {
+                double tilt = -0.5 + current/(dimension-1);
+                int distance = sendRayForDistance(map,facing,tilt);
+                updatePixelColumn((int) current,middle-distance+1, pixelList_Parameter);
+            }
         }
     }
 }

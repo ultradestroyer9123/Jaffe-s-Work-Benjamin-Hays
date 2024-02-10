@@ -4,7 +4,7 @@ public class DrawMap {
     private String MOVE_KEY = "W";
     
     private int sizeGrid;
-    private int wallProbability = 1000;
+    private int wallProbability = 10;
     private int plrSpawnX = 6;
     private int plrSpawnY = 6;
     private int minimumGridSize = 20;
@@ -31,23 +31,24 @@ public class DrawMap {
         int offset_y = new Random().nextInt(sizeGrid/2);
         // Finish Line
         // If equal to 1, the Finish line will be placed on a Horizontal Wall (Up,Down)
-        // Else, the Finish line will be placed on a Vertical Wall (Left,Right)
-        horizontal = new Random().nextInt(2) == 1; // Updated to handle both cases
-        placedFinishLine = true; // should be false, set this to false in the future, true for now because of debugging
+        // Updated to handle both cases
+        placedFinishLine = false; // should be false, set this to false in the future, true for now because of debugging
         placedPlayer = false;
-        
+        int finish_x = ((int) new Random().nextInt(50)) + 1;
+        int iterate = 0;
         // Creating the Grid
         // Each Odd number will not be a wall.
         for (int x = 0; x < sizeGrid; x++) {
             for (int y = 0; y < sizeGrid; y++) {
-                if (!placedPlayer && x == plrSpawnX && y == plrSpawnY) {
+                iterate += 1;
+                if (iterate == finish_x && !placedFinishLine) {
+                    this.grid += "F";
+                    placedFinishLine = true;
+                } else if (!placedPlayer && x == plrSpawnX && y == plrSpawnY) {
                     placedPlayer = true;
                     this.grid += "*";
                 } else if (x == 0 || x == sizeGrid - 1 || y == 0 || y == sizeGrid - 1) {
                     this.grid += "#";
-                } else if (!placedFinishLine && ((horizontal && x == (sizeGrid / 2) + offset_x)) || (!horizontal && y == (sizeGrid / 2) + offset_y)) {
-                    this.grid += "F"; // 'F' represents the finish line
-                    placedFinishLine = true;
                 } else if (new Random().nextInt(wallProbability) == 1) {
                     this.grid += "#";
                 } else {
