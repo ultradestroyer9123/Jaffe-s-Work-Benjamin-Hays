@@ -4,10 +4,8 @@ public class DrawMap {
     private String MOVE_KEY = "W";
     
     private int sizeGrid;
-    private int wallProbability = 10;
     private int plrSpawnX = 6;
     private int plrSpawnY = 6;
-    private int minimumGridSize = 20;
     private String grid = "";
     private boolean horizontal;
     private boolean placedFinishLine;
@@ -20,9 +18,9 @@ public class DrawMap {
     private String[] facingWays = {"West", "North", "East", "South"};
     private int facing = 2;
     // Constructor
-    public DrawMap() {
+    public DrawMap(int gridSize, int wallSpawnProbability) {
         // Grid Scale
-        sizeGrid = new Random().nextInt(5) + minimumGridSize;
+        sizeGrid = gridSize;
         if (sizeGrid % 2 != 0) {
             sizeGrid -= 1;
         }
@@ -49,7 +47,7 @@ public class DrawMap {
                     this.grid += "*";
                 } else if (x == 0 || x == sizeGrid - 1 || y == 0 || y == sizeGrid - 1) {
                     this.grid += "#";
-                } else if (new Random().nextInt(wallProbability) == 1) {
+                } else if (new Random().nextInt(wallSpawnProbability) == 1) {
                     this.grid += "#";
                 } else {
                     this.grid += " ";

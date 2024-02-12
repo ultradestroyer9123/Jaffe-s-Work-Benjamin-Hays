@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=DrawMap
-comment1.params=
-comment1.target=DrawMap()
+comment1.params=gridSize\ wallSpawnProbability
+comment1.target=DrawMap(int,\ int)
 comment10.params=reverse
 comment10.target=void\ move(boolean)
 comment2.params=

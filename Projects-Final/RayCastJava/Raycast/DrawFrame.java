@@ -14,9 +14,9 @@ public class DrawFrame {
     int pixel_amount_y = 15;
     int currentMove = 0;
     JPanel[][] pixelList;
-    public DrawFrame() {
+    public DrawFrame(int gridSize, int wallSpawnProbability) {
         JFrame frame = new JFrame();
-        DrawMap map = new DrawMap();
+        DrawMap map = new DrawMap(gridSize, wallSpawnProbability);
         pixelList = new JPanel[pixel_amount_x][pixel_amount_y];
         frame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -66,8 +66,24 @@ public class DrawFrame {
 
     
     public void updatePixel(int row, int column, boolean toggled, JPanel[][] pixelList_Parameter) {
+        
+        if (row < 0) {
+            row = 0;
+        }
+        
+        if (column < 0) {
+            column = 0;
+        }
+        
+        if (row >= pixel_amount_x) {
+            row -= (row-pixel_amount_x) + 1;
+        }
+        
+        if (column >= pixel_amount_y) {
+            column -= (column-pixel_amount_y) + 1;
+        }
 
-        if (pixelList_Parameter != null && pixelList_Parameter[row][column] != null) {
+        if (pixelList_Parameter != null && pixelList_Parameter[row] != null || pixelList_Parameter[row][column] != null) {
             if (toggled) {
                 pixelList_Parameter[row][column].setBackground(Color.WHITE);
                 pixelList_Parameter[row][column].repaint();
@@ -229,7 +245,12 @@ public class DrawFrame {
 
         int[] charPos = locateCharFromString(map);
         int distance_straight_ahead = distanceFromFacing(map,facing,charPos[0],charPos[1]);
-        updatePixelColumn(middle,middle-distance_straight_ahead+1, pixelList_Parameter);
+        int orig = distance_straight_ahead;
+        distance_straight_ahead = (middle-distance_straight_ahead)+1;
+        if (distance_straight_ahead == -1) {
+            distance_straight_ahead = (middle-orig);
+        }
+        updatePixelColumn(middle,(middle-distance_straight_ahead)+1, pixelList_Parameter);
         if (facing == "South" || facing == "West") {
             for (double current = dimension-1; current > -1; current--) {
                 double tilt = -0.5 + current/(dimension-1);
