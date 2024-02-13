@@ -40,6 +40,7 @@ public class DrawFrame {
         });
         Font f1 = new Font(Font.SANS_SERIF, Font.PLAIN, 20); 
         frame.setLayout(null);//using no layout managers  
+        frame.setTitle("Ray Maze - Active Game");
         frame.setVisible(false);//making the frame not visible to build pixels  
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setSize(pixel_size*pixel_amount_x,pixel_size*pixel_amount_y);
