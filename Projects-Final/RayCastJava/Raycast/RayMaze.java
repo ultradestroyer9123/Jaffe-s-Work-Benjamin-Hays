@@ -9,34 +9,47 @@ public class RayMaze extends JFrame {
     private JLabel wallInstanceLabel;
     private JTextField wallInstanceTextField;
     private JButton startButton;
-
+    private JButton exitButton;
     public RayMaze() {
+        
+        setUndecorated(true);
         setTitle("Ray Maze");
-        setSize(800, 650);
+        setBackground( new Color(0,0,0,85) );
+        setSize(400, 325);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(16, 4));
-
-        titleLabel = new JLabel("Ray Maze");
+        setLayout(new GridLayout(7, 8));
+        
+        exitButton = new JButton("<html><font color='white'>Exit</font></html>");
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        exitButton.setBackground( new Color(0,0,0,85) );
+        add(exitButton);
+        titleLabel = new JLabel("<html><font color='white'>Ray Maze</font></html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel);
 
-        gridSizeLabel = new JLabel("Grid Size", SwingConstants.CENTER);
+        gridSizeLabel = new JLabel("<html><font color='white'>Grid Size</font></html>", SwingConstants.CENTER);
         add(gridSizeLabel);
 
         gridSizeTextField = new JTextField("50");
         gridSizeTextField.setHorizontalAlignment(JTextField.CENTER);
-        gridSizeTextField.setOpaque(false);
+        //gridSizeTextField.setOpaque(false);
+        gridSizeTextField.setForeground(Color.BLACK);
         add(gridSizeTextField);
 
-        wallInstanceLabel = new JLabel("Wall Instance Amount", SwingConstants.CENTER);
+        wallInstanceLabel = new JLabel("<html><font color='white'>Wall Instance Amount</font></html>", SwingConstants.CENTER);
         add(wallInstanceLabel);
 
         wallInstanceTextField = new JTextField("10");
         wallInstanceTextField.setHorizontalAlignment(JTextField.CENTER);
-        wallInstanceTextField.setOpaque(false);
+        //wallInstanceTextField.setOpaque(false);
+        wallInstanceTextField.setForeground(Color.BLACK);
         add(wallInstanceTextField);
 
-        startButton = new JButton("Start");
+        startButton = new JButton("<html><font color='white'>Start Game</font></html>");
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int gridSize = Integer.parseInt(gridSizeTextField.getText());
@@ -44,6 +57,7 @@ public class RayMaze extends JFrame {
                 // Start your maze generation or any other action here
             }
         });
+        startButton.setBackground( new Color(0,0,0,85) );
         add(startButton);
 
         setVisible(true);
