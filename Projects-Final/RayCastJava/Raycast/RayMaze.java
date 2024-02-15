@@ -54,7 +54,8 @@ public class RayMaze extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int gridSize = Integer.parseInt(gridSizeTextField.getText());
                 int wallInstanceAmount = Integer.parseInt(wallInstanceTextField.getText());
-                // Start your maze generation or any other action here
+                DrawFrame frame = new DrawFrame(gridSize, wallInstanceAmount);
+                dispose();
             }
         });
         startButton.setBackground( new Color(0,0,0,85) );
