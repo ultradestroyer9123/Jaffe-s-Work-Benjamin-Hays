@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[38,)"
+license="LGPL V2.1"
+issueTrackerURL="https://github.com/Darkhax/Minecraft-Modding-Template/issues"
+
+[[mods]]
+modId="examplemod"
+version="3.0.34"
+displayName="ExampleMod"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/examplemod"
+credits="This project is made possible with Patreon support from players like you. Thank you! Rempler, lothrazar, SuperslowJelly, arcanearchivesmod, Pongo Sapiens, Darkosto"
+authors="Darkhax"
+description='''
+An example Minecraft mod.
+'''
+
+[[dependencies.examplemod]]
+    modId="forge"
+    mandatory=true
+    versionRange="[38,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.examplemod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18,1.19)"
+    ordering="NONE"
+    side="BOTH"

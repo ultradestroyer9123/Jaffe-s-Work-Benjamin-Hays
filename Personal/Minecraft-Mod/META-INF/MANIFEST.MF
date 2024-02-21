@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Specification-Title: ExampleMod
+Specification-Vendor: Darkhax
+Specification-Version: 3.0.34
+Implementation-Title: Forge
+Implementation-Version: 3.0.34
+Implementation-Vendor: Darkhax
+Implementation-Timestamp: 2021-12-04T11:15:03+0100
+Timestampe: 1638612903011
+Built-On-Java: 17.0.1+12-39 (Oracle Corporation)
+Build-On-Minecraft: 1.18
+MixinConfigs: examplemod.mixins.json
+
