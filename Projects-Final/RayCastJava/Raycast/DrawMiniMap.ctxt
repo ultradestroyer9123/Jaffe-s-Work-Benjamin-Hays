@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=DrawMiniMap
+comment1.params=grid\ pixel_amount_x\ pixel_amount_y
+comment1.target=DrawMiniMap(java.lang.String,\ int,\ int)
+numComments=2

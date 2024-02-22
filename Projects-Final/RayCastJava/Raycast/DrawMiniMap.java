@@ -10,8 +10,10 @@ import java.awt.Font;
 import java.net.CookieHandler;
 public class DrawMiniMap {
     int pixel_size = 5;
-    public DrawMiniMap(String grid) {
+    JPanel[][] pixelList;
+    public DrawMiniMap(String grid, int pixel_amount_x, int pixel_amount_y) {
         JFrame frame = new JFrame();
+        
         Font f1 = new Font(Font.SANS_SERIF, Font.PLAIN, 20); 
         frame.setLayout(null);//using no layout managers  
         frame.setTitle("Ray Maze - Active Game");
@@ -19,7 +21,7 @@ public class DrawMiniMap {
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setSize(pixel_size*pixel_amount_x,pixel_size*pixel_amount_y);
         frame.setResizable(false);
-        int count = 0; else if 
+        int count = 0;
         for (int x = 0; x < pixel_amount_x; x++) {
             for (int y = 0; y < pixel_amount_y; y++) {
                 JPanel pixel = new JPanel();

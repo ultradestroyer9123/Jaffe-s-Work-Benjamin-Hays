@@ -63,6 +63,7 @@ public class DrawFrame {
         
     
         frame.setVisible(true);//making the frame visible
+        DrawMiniMap miniHud = new DrawMiniMap(map.getMap(), pixel_amount_x, pixel_amount_y);
     }
 
     
