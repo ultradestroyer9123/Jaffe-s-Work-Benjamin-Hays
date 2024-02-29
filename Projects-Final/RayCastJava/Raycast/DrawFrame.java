@@ -9,9 +9,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.net.CookieHandler;
 public class DrawFrame {
-    int pixel_size = 75;
-    int pixel_amount_x = 19;
-    int pixel_amount_y = 15;
+    int pixel_size = 35;
+    int pixel_amount_x = 35;
+    int pixel_amount_y = 29;
     int currentMove = 0;
     JPanel[][] pixelList;
     public DrawFrame(int gridSize, int wallSpawnProbability) {
@@ -86,10 +86,11 @@ public class DrawFrame {
         }
 
         if (pixelList_Parameter != null && pixelList_Parameter[row] != null || pixelList_Parameter[row][column] != null) {
-            if (toggled) {
+            if (toggled && !pixelList_Parameter[row][column].getBackground().equals(Color.WHITE)) {
                 pixelList_Parameter[row][column].setBackground(Color.WHITE);
+                System.out.println(pixelList_Parameter[row][column].getBackground() == Color.WHITE);
                 pixelList_Parameter[row][column].repaint();
-            } else {
+            } else if (!toggled && !pixelList_Parameter[row][column].getBackground().equals(Color.BLACK)) {
                 pixelList_Parameter[row][column].setBackground(Color.BLACK);
                 pixelList_Parameter[row][column].repaint();
             }
