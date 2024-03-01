@@ -9,9 +9,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.net.CookieHandler;
 public class DrawFrame {
-    int pixel_size = 35;
-    int pixel_amount_x = 35;
-    int pixel_amount_y = 29;
+    int pixel_size = 30;
+    int pixel_size_x = pixel_size;
+    int pixel_size_y = pixel_size;
+    int pixel_amount_x = 45;
+    int pixel_amount_y = 34;
     int currentMove = 0;
     JPanel[][] pixelList;
     public DrawFrame(int gridSize, int wallSpawnProbability) {
@@ -43,7 +45,7 @@ public class DrawFrame {
         frame.setTitle("Ray Maze - Active Game");
         frame.setVisible(false);//making the frame not visible to build pixels  
         frame.getContentPane().setBackground(Color.BLACK);
-        frame.setSize(pixel_size*pixel_amount_x,pixel_size*pixel_amount_y);
+        frame.setSize(pixel_size_x*pixel_amount_x,pixel_size_y*pixel_amount_y);
         frame.setResizable(false);
         int count = 0;
         for (int x = 0; x < pixel_amount_x; x++) {
@@ -55,7 +57,7 @@ public class DrawFrame {
                 } else {
                     pixel.setBackground(Color.BLACK);
                 }
-                pixel.setBounds(x*pixel_size,y*pixel_size,pixel_size,pixel_size);
+                pixel.setBounds(x*pixel_size_x,y*pixel_size_y,pixel_size_x,pixel_size_y);
                 pixelList[x][y] = pixel;
                 frame.add(pixel);
             }
