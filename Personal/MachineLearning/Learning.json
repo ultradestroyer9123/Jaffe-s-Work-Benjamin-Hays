@@ -1,0 +1,12 @@
+{
+    "PastTense":{
+        "Suffix":["ed","o-e"],
+        "Irregular":[],
+        "Exceptions":[]
+    },
+    "PresentTense"{
+        "Suffix":["i-e"],
+        "Irregular":[],
+        "Exceptions":[]
+    }
+}
