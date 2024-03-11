@@ -27,12 +27,11 @@ def capitalizeByindex(p,num):
 def countLetterUp(num):
     
     current = math.trunc(num/6)
-    current2 = (current*6) % 26
-    print(current)
-    p = abc[current % 26] + abc[current % (26)] + "a000aaa"
+    current2 = math.trunc(current % 26)
+    p = abc[current % 26] + abc[current2] + "a000aaa"
     
     p = capitalizeByindex(p,num)
-    print(num,p)
+    print(current2, num,p)
 
 x = -1
 while x < 156:
