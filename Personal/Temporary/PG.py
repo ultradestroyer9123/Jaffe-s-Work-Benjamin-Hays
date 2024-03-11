@@ -1,7 +1,7 @@
 import math
 
 abc = "abcdefghijklmnopqrstuvwxyz"
-num = "0123456789"
+nums = "0123456789"
 
 # 0 = aaa000aaA
 # 1 = aaa000aAa
@@ -27,13 +27,22 @@ def capitalizeByindex(p,num):
 def countLetterUp(num):
     
     current = math.trunc(num/6)
-    current2 = math.trunc(current % 26)
-    p = abc[current % 26] + abc[current2] + "a000aaa"
-    
-    p = capitalizeByindex(p,num)
-    print(current2, num,p)
+    current2 = math.trunc(current/26)
+    current3 = math.trunc(current2/26)
+    current4 = math.trunc(current3/26)
+    current5 = math.trunc(current4/10)
+    current6 = math.trunc(current5/10)
+    current7 = math.trunc(current6/10)
+    current8 = math.trunc(current7/26)
+    current9 = math.trunc(current8/26)
+    p = abc[current % 26] + abc[current2 % 26] + abc[current3 % 26] + nums[current4 % 10] + nums[current5 % 10] + nums[current6 % 10] + abc[current7 % 26] + abc[current8 % 26] + abc[current9 % 26]
+    return capitalizeByindex(p,num)
 
 x = -1
-while x < 156:
+
+# 1.8534947e+12 -> 1853494700000
+while x < 6*26*26*26*10*10*10*26*26*26:
     x += 1
-    countLetterUp(x)
+    b = countLetterUp(x)
+    if x % 100000 == 0:
+        print(str(x), "-", b)
