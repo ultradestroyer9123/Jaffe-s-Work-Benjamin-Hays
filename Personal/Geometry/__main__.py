@@ -24,7 +24,7 @@ def main():
     turtle.penup()   # Lift the pen up
     turtle.goto(-apothem, -apothem)  # Set starting position
     turtle.pendown()  # Put the pen down
-    draw_square()  # Call the function to draw a square
+    drawShape()  # Call the function to draw a square
     turtle.done()  # Finish the drawing
 
 if __name__ == "__main__":
