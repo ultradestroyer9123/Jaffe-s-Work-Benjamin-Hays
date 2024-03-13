@@ -1,4 +1,16 @@
-import math
+import math, time
+from datetime import datetime
+
+
+def getSeconds():
+    seconds = 0
+    currentTime = datetime.now().strftime("%H:%M:%S.%f")
+    currentTime = currentTime.split(":")
+    seconds += float(currentTime[2])
+    seconds += float(currentTime[1])*60
+    seconds += float(currentTime[0])*60*60
+    return seconds
+
 
 #Vocab
 #ab = abc, ns = numbers, gn = giantnumber, c1-c9 = current1 - current9
@@ -16,12 +28,16 @@ cap_AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # 7 = aaa000aAb
 # (ab[26 ^ 0][26 ^ 1])
 
-def findIndexInAbc(letter):
+
+
+def findIndexInStr(letter, string):
+    letter = letter.lower()
     num = -1
-    for x in ab:
+    for x in string:
         num += 1
         if letter == x:
             return num
+    print("ERROR: ", letter, string)
 
 def pToNum(p):
     num = 0
@@ -30,7 +46,17 @@ def pToNum(p):
             break
         if character not in ns:
             num += 1
-    print(num)
+
+    num += findIndexInStr(p[0], ab) * 6
+    num += findIndexInStr(p[1], ab) * 6 * 26
+    num += findIndexInStr(p[2], ab) * 6 * 26 * 26
+    num += findIndexInStr(p[3], ns) * 6 * 26 * 26 * 26
+    num += findIndexInStr(p[4], ns) * 6 * 26 * 26 * 26 * 10
+    num += findIndexInStr(p[5], ns) * 6 * 26 * 26 * 26 * 10 * 10
+    num += findIndexInStr(p[6], ab) * 6 * 26 * 26 * 26 * 10 * 10 * 10
+    num += findIndexInStr(p[7], ab) * 6 * 26 * 26 * 26 * 10 * 10 * 10 * 26
+    num += findIndexInStr(p[8], ab) * 6 * 26 * 26 * 26 * 10 * 10 * 10 * 26 * 26
+    return num
 
 def countLetterUp(n):
     c1 = n // 6
@@ -60,4 +86,12 @@ gn = 6
 #     # if x % 500000 == 0:
 #     #     print(x, "-", b)
 #     print(x, "-", b)
-pToNum("aaa000Aaa")
+# pToNum("bAa000aaa")
+# for x in range(1200000*90,1200000*100000,1):
+#     p = countLetterUp(x)
+#     n = pToNum(p)
+#     print(x,p,n)
+
+tm = getSeconds()
+time.sleep(1)
+print(getSeconds()-tm)
