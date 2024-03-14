@@ -80,7 +80,43 @@ def countLetterUp(n):
 # 1.8534947e+12 -> 1853494700000
 # gn 
 gn = 6*26*26*26*10*10*10*26*26*26
-gn = 6
+last_pass = gn-1
+start = 0
+def divide_into_sections(start, stop, num_sections, index=None):
+    """start -> start of amount of numbers.
+    stop -> the final value of the amount of numbers
+    num_sections -> Amount of slices
+    index = None -> If you want a specific slice"""
+    stop+=1
+    if num_sections <= 0:
+        raise ValueError("Number of sections must be greater than zero")
+
+    section_size = (stop - start) // num_sections
+    remainder = (stop - start) % num_sections
+
+    result = []
+    current_start = start
+    for _ in range(num_sections):
+        section_end = current_start + section_size
+        if remainder > 0:
+            section_end += 1
+            remainder -= 1
+
+        result.append([current_start, section_end - 1])
+        current_start = section_end
+
+    if index is not None:
+        return result[index-1]
+    else:
+        return result
+
+
+
+# Example usage:
+sections = divide_into_sections(start, last_pass, 20,1)
+print(sections)
+
+
 # for x in range(0,gn,1):
 #     b = countLetterUp(x)
 #     # if x % 500000 == 0:
@@ -92,6 +128,3 @@ gn = 6
 #     n = pToNum(p)
 #     print(x,p,n)
 
-tm = getSeconds()
-time.sleep(1)
-print(getSeconds()-tm)
