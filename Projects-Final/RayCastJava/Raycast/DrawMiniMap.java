@@ -11,7 +11,7 @@ import java.net.CookieHandler;
 public class DrawMiniMap {
     int pixel_size = 5;
     JPanel[][] pixelList;
-    public DrawMiniMap(String grid, int pixel_amount_x, int pixel_amount_y) {
+    public DrawMiniMap(int pixel_amount_x, int pixel_amount_y) {
         JFrame frame = new JFrame();
         
         Font f1 = new Font(Font.SANS_SERIF, Font.PLAIN, 20); 
@@ -22,6 +22,8 @@ public class DrawMiniMap {
         frame.setSize(pixel_size*pixel_amount_x,pixel_size*pixel_amount_y);
         frame.setResizable(false);
         int count = 0;
+        frame.setVisible(true);//making the frame visible
+        pixelList = new JPanel[pixel_amount_x][pixel_amount_y];
         for (int x = 0; x < pixel_amount_x; x++) {
             for (int y = 0; y < pixel_amount_y; y++) {
                 JPanel pixel = new JPanel();
@@ -35,9 +37,24 @@ public class DrawMiniMap {
                 pixelList[x][y] = pixel;
                 frame.add(pixel);
             }
-        }
-        
+        }    
+    }
     
-        frame.setVisible(true);//making the frame visible
+    public void refresh(String grid) {
+        String[] rows = grid.split("\n");
+        for (int row = 0; row < rows.length; row++) {
+            for (int chars = 0; chars < rows[row].length(); chars++) {
+                if ((rows[row].charAt(chars) + "").equals("#") && !pixelList[chars][row].getBackground().equals(Color.WHITE)) {
+                    pixelList[chars][row].setBackground(Color.WHITE);
+                    pixelList[chars][row].repaint();
+                } else if ((rows[row].charAt(chars) + "").equals("*")) {
+                    pixelList[chars][row].setBackground(Color.RED);
+                    pixelList[chars][row].repaint();
+                } else if (!pixelList[chars][row].getBackground().equals(Color.BLACK)) {
+                    pixelList[chars][row].setBackground(Color.BLACK);
+                    pixelList[chars][row].repaint();
+                }
+            }
+        }
     }
 }

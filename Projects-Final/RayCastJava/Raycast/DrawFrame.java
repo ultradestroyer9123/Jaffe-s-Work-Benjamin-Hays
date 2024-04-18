@@ -65,11 +65,11 @@ public class DrawFrame {
         
     
         frame.setVisible(true);//making the frame visible
-        DrawMiniMap miniHud = new DrawMiniMap(map.getMap(), pixel_amount_x, pixel_amount_y);
+        
     }
 
     
-    public void updatePixel(int row, int column, boolean toggled, JPanel[][] pixelList_Parameter) {
+    public void updatePixel(int row, int column, String clr, JPanel[][] pixelList_Parameter) {
         
         if (row < 0) {
             row = 0;
@@ -88,12 +88,14 @@ public class DrawFrame {
         }
 
         if (pixelList_Parameter != null && pixelList_Parameter[row] != null || pixelList_Parameter[row][column] != null) {
-            if (toggled && !pixelList_Parameter[row][column].getBackground().equals(Color.WHITE)) {
+            if (clr == "white" && !pixelList_Parameter[row][column].getBackground().equals(Color.WHITE)) {
                 pixelList_Parameter[row][column].setBackground(Color.WHITE);
-                System.out.println(pixelList_Parameter[row][column].getBackground() == Color.WHITE);
                 pixelList_Parameter[row][column].repaint();
-            } else if (!toggled && !pixelList_Parameter[row][column].getBackground().equals(Color.BLACK)) {
+            } else if (clr == "black" && !pixelList_Parameter[row][column].getBackground().equals(Color.BLACK)) {
                 pixelList_Parameter[row][column].setBackground(Color.BLACK);
+                pixelList_Parameter[row][column].repaint();
+            } else if (clr == "gray" && !pixelList_Parameter[row][column].getBackground().equals(Color.LIGHT_GRAY)) {
+                pixelList_Parameter[row][column].setBackground(Color.LIGHT_GRAY);
                 pixelList_Parameter[row][column].repaint();
             }
         }
@@ -112,12 +114,17 @@ public class DrawFrame {
         int middle = (int) midPoint;
         
         for (int iterate = 0; iterate < dimension; iterate++) {
-            updatePixel(column,iterate,false,pixelList_Parameter);
+            updatePixel(column,iterate,"black",pixelList_Parameter);
         }
-        updatePixel(column,middle,true,pixelList_Parameter);
+        updatePixel(column,middle,"gray",pixelList_Parameter);
         for (int iterate = 0; iterate < size; iterate++) {
-            updatePixel(column,middle-iterate,true,pixelList_Parameter);
-            updatePixel(column,middle+iterate,true,pixelList_Parameter);
+            if (size < 2) {
+                updatePixel(column,middle-iterate,"gray",pixelList_Parameter);
+                updatePixel(column,middle+iterate,"gray",pixelList_Parameter);
+            } else {
+                updatePixel(column,middle-iterate,"white",pixelList_Parameter);
+                updatePixel(column,middle+iterate,"white",pixelList_Parameter);
+            }
         }
     }
     
