@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=DrawFrame
+comment1.params=gridSize\ wallSpawnProbability
+comment1.target=DrawFrame(int,\ int)
+comment2.params=e
+comment2.target=void\ keyPressed(java.awt.event.KeyEvent)
+comment3.params=row\ column\ clr\ pixelList_Parameter
+comment3.target=void\ updatePixel(int,\ int,\ java.lang.String,\ javax.swing.JPanel[][])
+comment4.params=column\ size\ pixelList_Parameter
+comment4.target=void\ updatePixelColumn(int,\ int,\ javax.swing.JPanel[][])
+comment5.params=map\ facing\ x\ y
+comment5.target=int\ distanceFromFacing(java.lang.String,\ java.lang.String,\ int,\ int)
+comment6.params=map
+comment6.target=int[]\ locateCharFromString(java.lang.String)
+comment7.params=map\ facing\ tilt
+comment7.target=int\ sendRayForDistance(java.lang.String,\ java.lang.String,\ double)
+comment8.params=map\ facing\ pixelList_Parameter
+comment8.target=void\ refresh(java.lang.String,\ java.lang.String,\ javax.swing.JPanel[][])
+numComments=9
