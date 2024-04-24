@@ -17,9 +17,12 @@ public class DrawFrame {
     int currentMove = 0;
     JPanel[][] pixelList;
     public DrawFrame(int gridSize, int wallSpawnProbability) {
+        // Declare new frame
         JFrame frame = new JFrame();
         DrawMap map = new DrawMap(gridSize, wallSpawnProbability);
         pixelList = new JPanel[pixel_amount_x][pixel_amount_y];
+        
+        // Create key input listener for (W,A,S,D, [Forward, Left, Down, Right])
         frame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
@@ -40,6 +43,8 @@ public class DrawFrame {
                 refresh(map.getMap(), map.getFacing(), pixelList);
             }
         });
+        
+        // Set application configs
         Font f1 = new Font(Font.SANS_SERIF, Font.PLAIN, 20); 
         frame.setLayout(null);//using no layout managers  
         frame.setTitle("Ray Maze - Active Game");
@@ -47,6 +52,8 @@ public class DrawFrame {
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setSize(pixel_size_x*pixel_amount_x,pixel_size_y*pixel_amount_y);
         frame.setResizable(false);
+        
+        // Color all pixels and make a white horizon line (There will always be a wall infront of the player regardless of distance)
         int count = 0;
         for (int x = 0; x < pixel_amount_x; x++) {
             for (int y = 0; y < pixel_amount_y; y++) {
@@ -70,7 +77,7 @@ public class DrawFrame {
 
     
     public void updatePixel(int row, int column, String clr, JPanel[][] pixelList_Parameter) {
-        
+        // clr = color
         if (row < 0) {
             row = 0;
         }
@@ -127,7 +134,7 @@ public class DrawFrame {
             }
         }
     }
-    
+    // How far a wall is from the player straight ahead.
     public int distanceFromFacing(String map, String facing, int x, int y) {
         int distance = 0;
         boolean startCounting = false;
@@ -181,6 +188,7 @@ public class DrawFrame {
         return distance;
     }
     
+    // Finds the character and gives x and y coordinates
     public int[] locateCharFromString(String map) {
         int x_local = 0;
         int y_local = 0;
@@ -199,7 +207,11 @@ public class DrawFrame {
         int[] result = {x_local,y_local};
         return result;
     }
-    
+    // Sends a ray in a specific angle and returns a distance
+    // Example: you're facing north and you want to see how far
+    // the object is 45 degrees to the left, it will use the 2D
+    // distance equation to find the distance between 2 points
+    // and return a distance.
     public int sendRayForDistance(String map, String facing, double tilt) {
         int[] xy = locateCharFromString(map);
         int x = xy[0];
@@ -239,7 +251,7 @@ public class DrawFrame {
 
 
 
-    
+    // Refreshes the frame with the designated updates.
     public void refresh(String map, String facing, JPanel[][] pixelList_Parameter) {
         int[] xy = locateCharFromString(map);
         int x = xy[0];
